@@ -2,7 +2,7 @@ import mysql.connector
 from .defines import BillData, MySQLInfo
 
 class QueryBills:
-    def __init__(self, mysql_info):
+    def __init__(self, mysql_info: MySQLInfo):
         self.mysql_info = mysql_info
     
     def by_amount(self, amount, finished=False):

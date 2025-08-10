@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import mysql.connector
 
 @dataclass(frozen=True)
 class MySQLInfo:
@@ -41,7 +42,6 @@ class BillData:
     
     def change_finished_state(self, finished):
         try:
-            import mysql.connector
             with mysql.connector.connect(**self.mysql_info.as_dict()) as db:
                 with db.cursor() as cursor:
                     cursor.execute(f"UPDATE bills SET finished = {'1' if finished else '0'} WHERE bill_id = {str(self.bill_id)};")
@@ -52,3 +52,14 @@ class BillData:
                     return BillData(**new_bill_data)
         except Exception as e:
             print(f"更新数据库失败...: {str(e)}")
+
+@dataclass(frozen=True)
+class UnpaidBill:
+    amount: float
+    channel_type: str
+
+    def as_dict(self):
+        return {
+            "amount": self.amount,
+            "channel_type": self.channel_type
+        }

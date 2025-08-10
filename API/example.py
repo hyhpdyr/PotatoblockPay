@@ -8,5 +8,9 @@ mysql_info = MySQLInfo(**{
     "database": "payment"
 })
 
-a = Query(mysql_info).by_id(114)[0].change_finished_state(True)
-print(a.as_dict())
+query_bills = QueryBills(mysql_info)
+bills = Bills(query_bills)
+bill = bills.create(0.01, "Alipay")
+print("start")
+bills.wait(bill)
+print("success")
