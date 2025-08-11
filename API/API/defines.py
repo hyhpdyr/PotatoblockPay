@@ -56,10 +56,12 @@ class BillData:
 @dataclass(frozen=True)
 class UnpaidBill:
     amount: float
-    channel_type: str
+    channel_id: int
+    timestamp: int
 
     def as_dict(self):
         return {
             "amount": self.amount,
-            "channel_type": self.channel_type
+            "channel_id": self.channel_id,
+            "timestamp": self.timestamp
         }

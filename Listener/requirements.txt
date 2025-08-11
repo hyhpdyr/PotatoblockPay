@@ -1,3 +1,5 @@
 mysql-connector-python
 selenium
 uiautomation
+requests
+flask

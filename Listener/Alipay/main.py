@@ -6,6 +6,10 @@ import sys
 import mysql.connector
 from cfg import channel_id, mysql_info
 
+import requests
+def get_time():
+    return int(requests.post("http://api.potatoblock.top/api/time/timestamp").json())
+
 service = EdgeService(executable_path="msedgedriver.exe")
 options = webdriver.EdgeOptions()
 driver = webdriver.Edge(service=service, options=options)
@@ -34,7 +38,7 @@ def notify_server(amount):
     try:
         with mysql.connector.connect(**mysql_info) as db:
             with db.cursor() as cursor:
-                cursor.execute(f"INSERT INTO bills (amount, time, channel_id, channel_type) VALUES ({str(amount)}, {str(int(time.time()))}, {str(channel_id)}, 'Alipay');")
+                cursor.execute(f"INSERT INTO bills (amount, time, channel_id, channel_type) VALUES ({str(amount)}, {str(get_time())}, {str(channel_id)}, 'Alipay');")
                 db.commit()
     except Exception as e:
         # 通知失败
@@ -63,7 +67,7 @@ def main():
             balance = get_balance()
             print(f"账户余额: {str(balance)}")
             if balance != last_balance:
-                balance_chance = balance - last_balance
+                balance_chance = (int(balance * 100) - int(last_balance * 100)) / 100
                 last_balance = balance
                 if balance_chance < 0:
                     continue

@@ -15,6 +15,7 @@ class QueryBills:
                     results = []
                     for row in bills:
                         row = list(row)
+                        row[1] = float(row[1])
                         row[6] = bool(row[6])
                         row.append(self.mysql_info)
                         results.append(BillData(*row))

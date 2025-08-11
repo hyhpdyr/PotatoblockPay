@@ -1,7 +1,7 @@
 # Config File
 
 # 通道ID
-channel_id = 1
+channel_id = 2
 
 # MySQL 数据库信息
 mysql_info = {
@@ -11,3 +11,9 @@ mysql_info = {
     "password": "PyIsTheBestLangInTheWorld",
     "database": "payment"
 }
+
+# Webhook 服务器端口
+webhook_port = 1145
+
+# 用于收款的爱发电商品名
+good_name = "Pay"

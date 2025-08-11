@@ -5,6 +5,10 @@ import os
 import mysql.connector
 from cfg import channel_id, mysql_info
 
+import requests
+def get_time():
+    return int(requests.post("http://api.potatoblock.top/api/time/timestamp").json())
+
 last_matched_info = None
 start_up = True
 
@@ -82,7 +86,7 @@ def notify_server():
     try:
         with mysql.connector.connect(**mysql_info) as db:
             with db.cursor() as cursor:
-                cursor.execute(f"INSERT INTO bills (amount, time, channel_id, channel_type, notes) VALUES ({str(amount)}, {str(int(time.time()))}, {str(channel_id)}, 'WeChat', %s);", (ps,))
+                cursor.execute(f"INSERT INTO bills (amount, time, channel_id, channel_type, notes) VALUES ({str(amount)}, {str(int(get_time()))}, {str(channel_id)}, 'WeChat', %s);", (ps,))
                 db.commit()
     except Exception as e:
         # 通知失败
