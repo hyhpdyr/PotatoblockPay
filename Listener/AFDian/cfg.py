@@ -1,6 +1,6 @@
 # Config File
 
-# 通道ID
+# 通道 ID
 channel_id = 2
 
 # MySQL 数据库信息
@@ -12,7 +12,10 @@ mysql_info = {
     "database": "payment"
 }
 
-# Webhook 服务器端口
+# Webhook 服务路由
+webhook_path = "/webhook"
+
+# Webhook 服务端口
 webhook_port = 1145
 
 # 用于收款的爱发电商品名

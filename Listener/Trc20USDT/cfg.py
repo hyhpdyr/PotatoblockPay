@@ -1,7 +1,7 @@
 # Config File
 
 # 通道 ID
-channel_id = 1
+channel_id = 3
 
 # MySQL 数据库信息
 mysql_info = {
@@ -11,3 +11,6 @@ mysql_info = {
     "password": "PyIsTheBestLangInTheWorld",
     "database": "payment"
 }
+
+# Tron 钱包地址
+wallet_address = "TQEHNZ****************************"

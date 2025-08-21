@@ -1,6 +1,6 @@
 # Config File
 
-# 通道ID
+# 通道 ID
 channel_id = 1
 
 # MySQL 数据库信息

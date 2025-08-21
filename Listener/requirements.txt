@@ -3,3 +3,4 @@ selenium
 uiautomation
 requests
 flask
+cryptography
