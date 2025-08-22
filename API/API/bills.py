@@ -3,6 +3,7 @@ import time
 from .query import QueryBills
 from .defines import UnpaidBill
 from typing import Callable
+import asyncio
 
 import requests
 def get_time():
@@ -41,6 +42,33 @@ class Bills:
                         self.bills.remove(bill)
                         paid_bill.change_finished_state(True)
                         callback(*params)
+                        return
+                time.sleep(2)
+        
+        thread = threading.Thread(target=check, args=(bill, callback, timeout_callback, params, timeout))
+        thread.start()
+        return thread
+    
+    def async_callback(self, bill: UnpaidBill, callback: Callable, timeout_callback: Callable = None, params: tuple = (), timeout: int = 180):
+        def check(bill: UnpaidBill, callback: Callable, timeout_callback: Callable, params: tuple, timeout: int):
+            start_time = get_time()
+            while True:
+                if (get_time() - start_time) > timeout:
+                    self.bills.remove(bill)
+                    if timeout_callback:
+                        async def async_callback():
+                            await timeout_callback(*params)
+                        asyncio.run(async_callback())
+                        return
+                    raise TimeoutError
+                paid_bills = self.query_bills.by_amount(bill.amount)
+                for paid_bill in paid_bills:
+                    if (paid_bill.channel_id == bill.channel_id) and (paid_bill.timestamp > bill.timestamp):
+                        self.bills.remove(bill)
+                        paid_bill.change_finished_state(True)
+                        async def async_callback():
+                            await callback(*params)
+                        asyncio.run(async_callback())
                         return
                 time.sleep(2)
         

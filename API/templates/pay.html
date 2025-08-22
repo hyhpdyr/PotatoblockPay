@@ -254,7 +254,6 @@
             <div class="payment-method">
                 <div class="payment-title">请使用以下方式完成支付</div>
                 
-                {# 微信支付 #}
                 {% if "wxpay" == pay_method %}
                 <div class="payment-icon">微信支付</div>
                 <div class="qrcode-container">
@@ -267,10 +266,9 @@
                     <br>
                     需要付的比商品价格高代表当前金额被占用，如果不想多付，请您稍后重试。
                     <br>
-                    如果超时，请不要再付款，而是重新下单！
+                    如果超时，请不要再付款，而是重新下单！不要刷新网页，否则超时倒计时会不准确！
                 </div>
                 
-                {# 支付宝 #}
                 {% elif "alipay" == pay_method %}
                 <div class="payment-icon">支付宝</div>
                 <div class="qrcode-container">
@@ -283,10 +281,9 @@
                     <br>
                     需要付的比商品价格高代表当前金额被占用，如果不想多付，请您稍后重试。
                     <br>
-                    如果超时，请不要再付款，而是重新下单！
+                    如果超时，请不要再付款，而是重新下单！不要刷新网页，否则超时倒计时会不准确！
                 </div>
                 
-                {# 爱发电赞助 #}
                 {% elif "afdian" == pay_method %}
                 <div class="payment-icon">爱发电赞助</div>
                 <div class="afdian-btn">
@@ -301,10 +298,9 @@
                     <br>
                     爱发电只能支付整数金额，如果无法付款，请更换付款方式。
                     <br>
-                    如果超时，请不要再付款，而是重新下单！
+                    如果超时，请不要再付款，而是重新下单！不要刷新网页，否则超时倒计时会不准确！
                 </div>
                 
-                {# 波场USDT #}
                 {% elif "trc20.usdt" == pay_method %}
                 <div class="payment-icon">TRC20-USDT</div>
                 <div class="usdt-address">
@@ -317,7 +313,7 @@
                     <br>
                     RMB与USDT的汇率实时获取，与欧易交易所C2C交易价格一致。
                     <br>
-                    如果超时，请不要再付款，而是重新下单！
+                    如果超时，请不要再付款，而是重新下单！不要刷新网页，否则超时倒计时会不准确！
                 </div>
                 {% endif %}
             </div>
