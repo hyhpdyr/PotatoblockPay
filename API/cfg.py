@@ -31,5 +31,8 @@ channels_info = {
     3: "TQEHNZSy9aEyr1YYvRJfRZspTS59PK5HK9",
 }
 
+# USDT 原子颗粒度(使用 USDT 支付时保留的小数位数)
+usdt_atom = 0.01
+
 # 支付网关外网 URL
 base_url = "http://114.51.4.191:9810"

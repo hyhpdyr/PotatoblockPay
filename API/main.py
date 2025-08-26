@@ -1,5 +1,5 @@
 from API import *
-from cfg import mysql_info, secret_key, webapi_port, channels, channels_info, base_url
+from cfg import mysql_info, secret_key, webapi_port, channels, channels_info, usdt_atom, base_url
 from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
 from fastapi.responses import FileResponse
 from fastapi.templating import Jinja2Templates
@@ -27,6 +27,8 @@ mysql_info = MySQLInfo(**mysql_info)
 query_bills = QueryBills(mysql_info)
 bills = Bills(query_bills)
 
+usdt_atom = int(Decimal("1") / Decimal(str(usdt_atom)))
+
 @app.post("/submit")
 async def submit(data: Request):
     data = await data.body()
@@ -48,7 +50,7 @@ async def submit(data: Request):
     data["real_amount"] = data["amount"]
     if "usdt" in data.get("trade_type", ""):
         usdt_price = await asyncio.to_thread(get_usdt_price)
-        data["real_amount"] = int((data["real_amount"] * 1000000) / usdt_price) / 1000000
+        data["real_amount"] = int(Decimal(data["real_amount"]) * usdt_atom / usdt_price) / usdt_atom
         timeout_time = 600
     bill = bills.create(float(data.get("real_amount")), int(data.get("channel")))
     bills.callback(bill, success_callback, failed_callback, (data,), timeout_time)
