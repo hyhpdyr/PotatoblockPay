@@ -1,13 +1,13 @@
-import re
-import time
 import uiautomation as automation
-import os
+import requests
 import mysql.connector
 from cfg import channel_id, mysql_info
+import re
+import time
+import os
 
-import requests
 def get_time():
-    return int(requests.post("http://api.potatoblock.top/api/time/timestamp").json())
+    return int(requests.post("https://api.potatoblock.com/api/time/timestamp").json())
 
 last_matched_info = None
 start_up = True

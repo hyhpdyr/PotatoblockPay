@@ -7,8 +7,7 @@ import asyncio
 
 import requests
 def get_time():
-    import time
-    return int(requests.post("http://api.potatoblock.top/api/time/timestamp").json())
+    return int(requests.post("https://api.potatoblock.com/api/time/timestamp").json())
 
 class Bills:
     def __init__(self, query_bills: QueryBills):

@@ -1,14 +1,14 @@
 from selenium import webdriver
 from selenium.webdriver.edge.service import Service as EdgeService
 from selenium.webdriver.common.by import By
-import time
-import sys
+import requests
 import mysql.connector
 from cfg import channel_id, mysql_info
+import sys
+import time
 
-import requests
 def get_time():
-    return int(requests.post("http://api.potatoblock.top/api/time/timestamp").json())
+    return int(requests.post("https://api.potatoblock.com/api/time/timestamp").json())
 
 service = EdgeService(executable_path="msedgedriver.exe")
 options = webdriver.EdgeOptions()

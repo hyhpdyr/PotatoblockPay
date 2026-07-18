@@ -16,7 +16,7 @@ import time
 
 def get_usdt_price():
     try:
-        return Decimal(requests.post(f"http://api.potatoblock.top/api/okx/usdt-rmb-price?ts={int(time.time())}").json())
+        return Decimal(requests.post(f"https://api.potatoblock.com/api/okx/usdt-rmb-price?ts={int(time.time())}").json())
     except Exception:
         return Decimal("7.0")
 

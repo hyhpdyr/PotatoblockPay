@@ -1,15 +1,15 @@
 from flask import Flask, request
-import mysql.connector
-from cfg import channel_id, mysql_info, webhook_path, webhook_port, good_name
-import base64
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import padding, rsa
 from cryptography.hazmat.primitives.serialization import load_pem_public_key
 from cryptography.exceptions import InvalidSignature
-
 import requests
+import mysql.connector
+from cfg import channel_id, mysql_info, webhook_path, webhook_port, good_name
+import base64
+
 def get_time():
-    return int(requests.post("http://api.potatoblock.top/api/time/timestamp").json())
+    return int(requests.post("https://api.potatoblock.com/api/time/timestamp").json())
 
 app = Flask(__name__)
 

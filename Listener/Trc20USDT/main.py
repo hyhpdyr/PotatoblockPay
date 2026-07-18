@@ -1,11 +1,11 @@
-import time
-import mysql.connector
-from decimal import Decimal
-from cfg import channel_id, mysql_info, wallet_address
 import requests
+import mysql.connector
+from cfg import channel_id, mysql_info, wallet_address
+import time
+from decimal import Decimal
 
 def get_time():
-    return int(requests.post("http://api.potatoblock.top/api/time/timestamp").json())
+    return int(requests.post("https://api.potatoblock.com/api/time/timestamp").json())
 
 def check_reception():
     print("USDT收款持续监听中...")
